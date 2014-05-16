@@ -5,6 +5,7 @@
 	position: absolute;
 	left: 0px;
 	right: 0px;
+	-ms-overflow-style: none;
 }
 
 .scroll {
@@ -17,14 +18,6 @@
 
 .box::-webkit-scrollbar { 
   display: none; 
-}
-
-.box {
- 	-ms-overflow-style: none;
-}
-
-.box-wrapper {
-	overflow: hidden;
 }
 
 .text {
