@@ -12,14 +12,29 @@
 
 <body>
 <div class="box"><div class="scroll"></div></div>
-<div style="height: 268px; width: 640px; position: absolute; left: 50px; top: 100px; background-image: url('assets/img/dollarback.jpg')"></div>
-<div style="height: 268px; width: 640px; position: absolute; left: 50px; top: 100px; background-image: url('assets/img/dollarfront.jpg')"></div>
+
+<div id="dollar0" class="dollar-image" style="height: 268px; width: 640px; position: absolute; left: 50px; top: 100px; background-image: url('assets/img/dollarback.jpg')"></div>
+<div id="dollar1" class="dollar-image" style="height: 268px; width: 640px; position: absolute; left: 50px; top: -269px; background-image: url('assets/img/dollarfront.jpg')"></div>
+<div id="dollar2" class="dollar-image" style="height: 268px; width: 640px; position: absolute; left: 50px; top: -269px; background-image: url('assets/img/dollarback.jpg')"></div>
+<div id="dollar3" class="dollar-image" style="height: 268px; width: 640px; position: absolute; left: 50px; top: -269px; background-image: url('assets/img/dollarfront.jpg')"></div>
+<div id="dollar4" class="dollar-image" style="height: 268px; width: 640px; position: absolute; left: 50px; top: -269px; background-image: url('assets/img/dollarback.jpg')"></div>
+<div id="dollar5" class="dollar-image" style="height: 268px; width: 640px; position: absolute; left: 50px; top: -269px; background-image: url('assets/img/dollarfront.jpg')"></div>
+<div id="dollar6" class="dollar-image" style="height: 268px; width: 640px; position: absolute; left: 50px; top: -269px; background-image: url('assets/img/dollarback.jpg')"></div>
+<div id="dollar7" class="dollar-image" style="height: 268px; width: 640px; position: absolute; left: 50px; top: -269px; background-image: url('assets/img/dollarfront.jpg')"></div>
+<div id="dollar8" class="dollar-image" style="height: 268px; width: 640px; position: absolute; left: 50px; top: -269px; background-image: url('assets/img/dollarback.jpg')"></div>
+<div id="dollar9" class="dollar-image" style="height: 268px; width: 640px; position: absolute; left: 50px; top: -269px; background-image: url('assets/img/dollarfront.jpg')"></div>
+<div id="dollar10" class="dollar-image" style="height: 268px; width: 640px; position: absolute; left: 50px; top: -269px; background-image: url('assets/img/dollarback.jpg')"></div>
+
 <div style="position:absolute; left: 700px; top:200px">
 <div class="text" id="text-main"></div>
 <div class="text" id="text-desc"></div>
+<div class="text" id="text-test"></div>
 </div>
 
 <script>
+
+var lastpos = 0;
+
 $(document).ready(function() {
   set_text();
   $(window).resize(set_text);
@@ -31,12 +46,143 @@ $( ".box" ).scroll(function() {
 
 function set_text(){
 	body_sizer();
-	var height = $(window).height() * 29
-	var position = $( ".box" ).scrollTop() / height;
+	var height = $(window).height();
+	var position = $( ".box" ).scrollTop() / ( height*29 );
+
+
+	if (lastpos <= .06 && position > .06){
+		$( "#dollar1" ).show().animate({ top: "100px" }, 150);
+	} else if (lastpos <= .16 && position > .16){
+		$( "#dollar2" ).show().animate({ top: "100px" }, 150);
+	} else if (lastpos <= .26 && position > .26){
+		$( "#dollar3" ).show().animate({ top: "100px" }, 150);
+	} else if (lastpos <= .36 && position > .36){
+		$( "#dollar4" ).show().animate({ top: "100px" }, 150);
+	} else if (lastpos <= .46 && position > .46){
+		$( "#dollar5" ).show().animate({ top: "100px" }, 150);
+	} else if (lastpos <= .56 && position > .56){
+		$( "#dollar6" ).show().animate({ top: "100px" }, 150);
+	} else if (lastpos <= .66 && position > .66){
+		$( "#dollar7" ).show().animate({ top: "100px" }, 150);
+	} else if (lastpos <= .76 && position > .76){
+		$( "#dollar8" ).show().animate({ top: "100px" }, 150);
+	} else if (lastpos <= .86 && position > .86){
+		$( "#dollar9" ).show().animate({ top: "100px" }, 150);
+	} else if (lastpos <= .96 && position > .96){
+		$( "#dollar10" ).show().animate({ top: "100px" }, 150);
+	}
+
+	if (lastpos <= .04 && position > .04){
+		$( "#dollar0" ).animate({ top: height }, 150, function(){
+			$( "#dollar0" ).hide();
+		});
+	} else if (lastpos <= .14 && position > .14){
+		$( "#dollar1" ).animate({ top: height }, 150, function(){
+			$( "#dollar1" ).hide();
+		});
+	} else if (lastpos <= .24 && position > .24){
+		$( "#dollar2" ).animate({ top: height }, 150, function(){
+			$( "#dollar2" ).hide();
+		});
+	} else if (lastpos <= .34 && position > .34){
+		$( "#dollar3" ).animate({ top: height }, 150, function(){
+			$( "#dollar3" ).hide();
+		});
+	} else if (lastpos <= .44 && position > .44){
+		$( "#dollar4" ).animate({ top: height }, 150, function(){
+			$( "#dollar4" ).hide();
+		});
+	} else if (lastpos <= .54 && position > .54){
+		$( "#dollar5" ).animate({ top: height }, 150, function(){
+			$( "#dollar5" ).hide();
+		});
+	} else if (lastpos <= .64 && position > .64){
+		$( "#dollar6" ).animate({ top: height }, 150, function(){
+			$( "#dollar6" ).hide();
+		});
+	} else if (lastpos <= .74 && position > .74){
+		$( "#dollar7" ).animate({ top: height }, 150, function(){
+			$( "#dollar7" ).hide();
+		});
+	} else if (lastpos <= .84 && position > .84){
+		$( "#dollar8" ).animate({ top: height }, 150, function(){
+			$( "#dollar8" ).hide();
+		});
+	} else if (lastpos <= .94 && position > .94){
+		$( "#dollar9" ).animate({ top: height }, 150, function(){
+			$( "#dollar9" ).hide();
+		});
+	}
+
+	if (lastpos >= .06 && position < .06){
+		$( "#dollar1" ).animate({ top: "-269px" }, 150, function(){
+			$( "#dollar1" ).hide();
+		});
+		} else if (lastpos >= .16 && position < .16){
+		$( "#dollar2" ).animate({ top: "-269px" }, 150, function(){
+			$( "#dollar2" ).hide();
+		});
+		} else if (lastpos >= .26 && position < .26){
+		$( "#dollar3" ).animate({ top: "-269px" }, 150, function(){
+			$( "#dollar3" ).hide();
+		});
+		} else if (lastpos >= .36 && position < .36){
+		$( "#dollar4" ).animate({ top: "-269px" }, 150, function(){
+			$( "#dollar4" ).hide();
+		});
+		} else if (lastpos >= .46 && position < .46){
+		$( "#dollar5" ).animate({ top: "-269px" }, 150, function(){
+			$( "#dollar5" ).hide();
+		});
+		} else if (lastpos >= .56 && position < .56){
+		$( "#dollar6" ).animate({ top: "-269px" }, 150, function(){
+			$( "#dollar6" ).hide();
+		});
+		} else if (lastpos >= .66 && position < .66){
+		$( "#dollar7" ).animate({ top: "-269px" }, 150, function(){
+			$( "#dollar7" ).hide();
+		});
+		} else if (lastpos >= .76 && position < .76){
+		$( "#dollar8" ).animate({ top: "-269px" }, 150, function(){
+			$( "#dollar8" ).hide();
+		});
+		} else if (lastpos >= .86 && position < .86){
+		$( "#dollar9" ).animate({ top: "-269px" }, 150, function(){
+			$( "#dollar9" ).hide();
+		});
+		} else if (lastpos >= .96 && position < .96){
+		$( "#dollar10" ).animate({ top: "-269px" }, 150, function(){
+			$( "#dollar10" ).hide();
+		});
+	}
+
+	if (lastpos >= .04 && position < .04){
+		$( "#dollar0" ).show().animate({ top: "100px" }, 150);
+	} else if (lastpos >= .14 && position < .14){
+		$( "#dollar1" ).show().animate({ top: "100px" }, 150);
+	} else if (lastpos >= .24 && position < .24){
+		$( "#dollar2" ).show().animate({ top: "100px" }, 150);
+	} else if (lastpos >= .34 && position < .34){
+		$( "#dollar3" ).show().animate({ top: "100px" }, 150);
+	} else if (lastpos >= .44 && position < .44){
+		$( "#dollar4" ).show().animate({ top: "100px" }, 150);
+	} else if (lastpos >= .54 && position < .54){
+		$( "#dollar5" ).show().animate({ top: "100px" }, 150);
+	} else if (lastpos >= .64 && position < .64){
+		$( "#dollar6" ).show().animate({ top: "100px" }, 150);
+	} else if (lastpos >= .74 && position < .74){
+		$( "#dollar7" ).show().animate({ top: "100px" }, 150);
+	} else if (lastpos >= .84 && position < .84){
+		$( "#dollar8" ).show().animate({ top: "100px" }, 150);
+	} else if (lastpos >= .94 && position < .94){
+		$( "#dollar9" ).show().animate({ top: "100px" }, 150);
+	}
+
+	lastpos = position;
 
 	if (position > .95){
 		var string1 = "Now for the profits...";
-		var string2 = "...leaving the artists with <span style=\"color:black;font-weight:bold\">$10</span> on a CD that sold <span style=\"color:black;font-weight:bold\">$100</span>."
+		var string2 = "...leaving the artists with <span style=\"color:black;font-weight:bold\">$10</span> on a CD that sold <span style=\"color:black;font-weight:bold\">$100</span> - to split amongst all the bandmembers."
 		var opacity1 = 1;
 		var opacity2 = Math.pow(((position - .95) * 40),2);
 	} else if (position > .85) {

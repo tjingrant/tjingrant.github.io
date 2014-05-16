@@ -12,11 +12,15 @@
 	position: absolute;
 	left: 0px;
 	right: 0px;
-	z-index: 2;
+	z-index: 3;
 }
 
 .box::-webkit-scrollbar { 
     display: none; 
+}
+
+.box {
+ -ms-overflow-style: none;
 }
 
 .text {
@@ -32,4 +36,9 @@
 #text-desc {
 	font-size: 15px;
 	color: #777;
+}
+
+.dollar-image {
+	display: hidden;
+	z-index: 2;
 }
