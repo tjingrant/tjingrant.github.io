@@ -1,14 +1,118 @@
 <!DOCTYPE html>
 <html lang="en">
+<script src="assets/js/jquery-1.6.3.min.js"></script>
 
 <head>
   <meta charset="utf-8">
   <title>Dollar</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="author" content="didyoueven">
-  <link href="assets/css/main.css" rel="stylesheet">
+  <link href="assets/css/dollar.css" rel="stylesheet">
 </head>
 
 <body>
-<div style="background-image: url(../assets/images/dollar.jpg)"></div>
+<div class="box"><div class="scroll"></div></div>
+<div style="height: 268px; width: 640px; position: absolute; left: 50px; top: 100px; background-image: url('assets/img/dollarback.jpg')"></div>
+<div style="height: 268px; width: 640px; position: absolute; left: 50px; top: 100px; background-image: url('assets/img/dollarfront.jpg')"></div>
+<div style="position:absolute; left: 700px; top:200px">
+<div class="text" id="text-main"></div>
+<div class="text" id="text-desc"></div>
+</div>
+
+<script>
+$(document).ready(function() {
+  set_text();
+  $(window).resize(set_text);
+});
+
+$( ".box" ).scroll(function() {
+	set_text();
+});
+
+function set_text(){
+	body_sizer();
+	var height = $(window).height() * 99
+	var position = $( ".box" ).scrollTop() / height;
+
+	if (position > .95){
+		var string1 = "Now for the profits...";
+		var string2 = "...leaving the artists with <span style=\"color:black;font-weight:bold\">$10</span> on a CD that sold <span style=\"color:black;font-weight:bold\">$100</span>."
+		var opacity1 = 1;
+		var opacity2 = Math.pow(((position - .95) * 20),2);
+	} else if (position > .85) {
+		var string1 = "Now for the profits...";
+		var string2 = "...the record labels take a whopping <span style=\"color:black;font-weight:bold\">$10.63</span>..."
+		var opacity1 = 1;
+		var opacity2 = Math.pow(((.05 - Math.abs(position - .90)) * 20),2);
+	} else if (position > .75) {
+		var string1 = "Now for the profits...";
+		var string2 = "Retail stores take their share: <span style=\"color:black;font-weight:bold\">$5</span>...";
+		var opacity1 = Math.pow(((.05 - Math.abs(position - .80)) * 20),2);
+		var opacity2 = opacity1;
+		if (position > .8) {
+			opacity1 = 1;
+		}
+	} else if (position > .65) {
+		var string1 = "The musicians' unions earn $1.06.";
+		var string2 = "";
+		var opacity1 = Math.pow(((.05 - Math.abs(position - .70)) * 20),2);
+		var opacity2 = 0;
+	} else if (position > .55) {
+		var string1 = "Packaging and manufacturing take $5.00";
+		var string2 = "This includes the costs of printing the cover art and burning the actual CDs";
+		var opacity1 = Math.pow(((.05 - Math.abs(position - .60)) * 20),2);
+		var opacity2 = opacity1;
+	} else if (position > .45) {
+		var string1 = "The publishing royalties amount to $5.12.";
+		var string2 = "Many bands employ ghost-writers.";
+		var opacity1 = Math.pow(((.05 - Math.abs(position - .50)) * 20),2);
+		var opacity2 = opacity1;
+	} else if (position > .35) {
+		var string1 = "Distribution costs $5.62.";
+		var string2 = "This means shipping the records to physical retail locations where they will be sold.";
+		var opacity1 = Math.pow(((.05 - Math.abs(position - .40)) * 20),2);
+		var opacity2 = opacity1;
+	} else if (position > .25) {
+		var string1 = "Marketing and promoting the album costs $15.01.";
+		var string2 = "";
+		var opacity1 = Math.pow(((.05 - Math.abs(position - .30)) * 20),2);
+		var opacity2 = 0;
+	} else if (position > .15) {
+		var string1 = "A close second is the overhead of the record label: $18.19.";
+		var string2 = "";
+		var opacity1 = Math.pow(((.05 - Math.abs(position - .20)) * 20),2);
+		var opacity2 = 0;
+	} else if (position > .05) {
+		var string1 = "By far the largest cost is retail overhead, at $24.33.";
+		var string2 = "This is the amount a retailer spends per $100 to pay its employees, plus storage the records, etc.";
+		var opacity1 = Math.pow(((.05 - Math.abs(position - .10)) * 20),2);
+		var opacity2 = opacity1;
+	} else {
+		var string1 = "Assuming a particular CD sells for $100...";
+		var string2 = "...let's see how much the artist actually makes.";
+		var opacity1 = Math.pow(((.05 - Math.abs(position)) * 20),2);
+		var opacity2 = opacity1;
+	}
+
+	$("#text-main").html(string1).css({ opacity: opacity1 });
+	$("#text-desc").html(string2).css({ opacity: opacity2 });
+	$(".box").scrollTo()
+};
+
+function body_sizer() {
+  var height = $(window).height() * 100;
+  $(".scroll").height(height);
+};
+
+
+function destroy_text(position) {
+
+};
+
+function new_text(position) {
+
+};
+
+</script>
 </body>
+</html>
