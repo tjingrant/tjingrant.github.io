@@ -152,7 +152,10 @@ function set_text(){
 		$( "#dollar1" ).show().css({ top: place });
 	}
 
-	if (position >= .8 && position < .86) {
+	if (position >= .9 && position < .96) {
+		place = 100 - Math.pow(((.9 - position) * 17),3) * (height - 100);
+		$( "#dollar9" ).show().css({ top: place });
+	} else if (position >= .8 && position < .86) {
 		place = 100 - Math.pow(((.8 - position) * 17),3) * (height - 100);
 		$( "#dollar8" ).show().css({ top: place });
 	} else if (position >= .7 && position < .76) {
