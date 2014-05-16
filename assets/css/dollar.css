@@ -16,11 +16,15 @@
 }
 
 .box::-webkit-scrollbar { 
-    display: none; 
+  display: none; 
 }
 
 .box {
- -ms-overflow-style: none;
+ 	-ms-overflow-style: none;
+}
+
+.box-wrapper {
+	overflow: hidden;
 }
 
 .text {
