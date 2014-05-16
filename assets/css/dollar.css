@@ -39,4 +39,10 @@
 .dollar-image {
 	display: hidden;
 	z-index: 2;
+/*	background-repeat:no-repeat;
+	background-position:center; */
+/*	height: 368px;
+	width: 640px;*/
+	position: absolute;
+	top: -369px;
 }
