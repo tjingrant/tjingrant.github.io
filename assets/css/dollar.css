@@ -23,7 +23,8 @@
 .text {
 	font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", 
   Helvetica, Arial, "Lucida Grande", sans-serif;
-  margin-right: 20px;
+  margin-right: 100px;
+  margin-left: 10px;
 }
 
 #text-main {
