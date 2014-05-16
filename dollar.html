@@ -31,23 +31,23 @@ $( ".box" ).scroll(function() {
 
 function set_text(){
 	body_sizer();
-	var height = $(window).height() * 99
+	var height = $(window).height() * 29
 	var position = $( ".box" ).scrollTop() / height;
 
 	if (position > .95){
 		var string1 = "Now for the profits...";
 		var string2 = "...leaving the artists with <span style=\"color:black;font-weight:bold\">$10</span> on a CD that sold <span style=\"color:black;font-weight:bold\">$100</span>."
 		var opacity1 = 1;
-		var opacity2 = Math.pow(((position - .95) * 20),2);
+		var opacity2 = Math.pow(((position - .95) * 40),2);
 	} else if (position > .85) {
 		var string1 = "Now for the profits...";
 		var string2 = "...the record labels take a whopping <span style=\"color:black;font-weight:bold\">$10.63</span>..."
 		var opacity1 = 1;
-		var opacity2 = Math.pow(((.05 - Math.abs(position - .90)) * 20),2);
+		var opacity2 = Math.pow(((.05 - Math.abs(position - .90)) * 40),2);
 	} else if (position > .75) {
 		var string1 = "Now for the profits...";
 		var string2 = "Retail stores take their share: <span style=\"color:black;font-weight:bold\">$5</span>...";
-		var opacity1 = Math.pow(((.05 - Math.abs(position - .80)) * 20),2);
+		var opacity1 = Math.pow(((.05 - Math.abs(position - .80)) * 40),2);
 		var opacity2 = opacity1;
 		if (position > .8) {
 			opacity1 = 1;
@@ -55,52 +55,51 @@ function set_text(){
 	} else if (position > .65) {
 		var string1 = "The musicians' unions earn $1.06.";
 		var string2 = "";
-		var opacity1 = Math.pow(((.05 - Math.abs(position - .70)) * 20),2);
+		var opacity1 = Math.pow(((.05 - Math.abs(position - .70)) * 40),2);
 		var opacity2 = 0;
 	} else if (position > .55) {
 		var string1 = "Packaging and manufacturing take $5.00";
 		var string2 = "This includes the costs of printing the cover art and burning the actual CDs";
-		var opacity1 = Math.pow(((.05 - Math.abs(position - .60)) * 20),2);
+		var opacity1 = Math.pow(((.05 - Math.abs(position - .60)) * 40),2);
 		var opacity2 = opacity1;
 	} else if (position > .45) {
 		var string1 = "The publishing royalties amount to $5.12.";
 		var string2 = "Many bands employ ghost-writers.";
-		var opacity1 = Math.pow(((.05 - Math.abs(position - .50)) * 20),2);
+		var opacity1 = Math.pow(((.05 - Math.abs(position - .50)) * 40),2);
 		var opacity2 = opacity1;
 	} else if (position > .35) {
 		var string1 = "Distribution costs $5.62.";
 		var string2 = "This means shipping the records to physical retail locations where they will be sold.";
-		var opacity1 = Math.pow(((.05 - Math.abs(position - .40)) * 20),2);
+		var opacity1 = Math.pow(((.05 - Math.abs(position - .40)) * 40),2);
 		var opacity2 = opacity1;
 	} else if (position > .25) {
 		var string1 = "Marketing and promoting the album costs $15.01.";
 		var string2 = "";
-		var opacity1 = Math.pow(((.05 - Math.abs(position - .30)) * 20),2);
+		var opacity1 = Math.pow(((.05 - Math.abs(position - .30)) * 40),2);
 		var opacity2 = 0;
 	} else if (position > .15) {
 		var string1 = "A close second is the overhead of the record label: $18.19.";
 		var string2 = "";
-		var opacity1 = Math.pow(((.05 - Math.abs(position - .20)) * 20),2);
+		var opacity1 = Math.pow(((.05 - Math.abs(position - .20)) * 40),2);
 		var opacity2 = 0;
 	} else if (position > .05) {
 		var string1 = "By far the largest cost is retail overhead, at $24.33.";
 		var string2 = "This is the amount a retailer spends per $100 to pay its employees, plus storage the records, etc.";
-		var opacity1 = Math.pow(((.05 - Math.abs(position - .10)) * 20),2);
+		var opacity1 = Math.pow(((.05 - Math.abs(position - .10)) * 40),2);
 		var opacity2 = opacity1;
 	} else {
 		var string1 = "Assuming a particular CD sells for $100...";
 		var string2 = "...let's see how much the artist actually makes.";
-		var opacity1 = Math.pow(((.05 - Math.abs(position)) * 20),2);
+		var opacity1 = Math.pow(((.05 - Math.abs(position)) * 40),2);
 		var opacity2 = opacity1;
 	}
 
 	$("#text-main").html(string1).css({ opacity: opacity1 });
 	$("#text-desc").html(string2).css({ opacity: opacity2 });
-	$(".box").scrollTo()
 };
 
 function body_sizer() {
-  var height = $(window).height() * 100;
+  var height = $(window).height() * 30;
   $(".scroll").height(height);
 };
 
