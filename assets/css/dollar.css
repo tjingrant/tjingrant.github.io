@@ -23,8 +23,27 @@
 .text {
 	font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", 
   Helvetica, Arial, "Lucida Grande", sans-serif;
-  margin-right: 100px;
-  margin-left: 10px;
+  margin-left: 25px;
+}
+
+.text h1 {
+	font-family: "HelveticaNeue-UltraLight", "HelveticaNeue-Light", "Helvetica Neue Light", 
+	"Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
+	font-style: normal;
+	font-weight: normal;
+	font-size: 35px;
+	left: 0px;
+	width: 35%;
+	text-align: center;
+	margin-top: 100px;
+	position: absolute;
+}
+
+.text-wrapper {
+	position: absolute;
+	margin-left: 20px;
+	top: 300px;
+	width: 35%;
 }
 
 #text-main {
@@ -39,10 +58,62 @@
 .dollar-image {
 	display: hidden;
 	z-index: 2;
-/*	background-repeat:no-repeat;
-	background-position:center; */
-/*	height: 368px;
-	width: 640px;*/
 	position: absolute;
 	top: -369px;
+	left: 40%;
 }
+
+.margin {
+  font-size: 12px;
+  position: absolute;
+  bottom: 30px;
+  margin-left: 45px;
+  width: 35%;
+  z-index: 4;
+}
+
+#dollar0 {
+	top: 200px;
+}
+
+#dollar1 {
+	margin: -70px 0px 0px 0px;
+}
+
+#dollar2 {
+	margin: -35px 0px 0px 0px;
+}
+
+#dollar3 {
+	margin: -35px 0px 0px 0px;
+}
+
+#dollar4 {
+	margin: -50px 0px 0px 0px;
+}
+
+#dollar5 {
+	margin: -35px 0px 0px 20px;
+}
+
+#dollar6 {
+	margin: -35px 0px 0px -12px;
+}
+
+#dollar7 {
+	margin: -70px 0px 0px -14px;
+}
+
+#dollar8 {
+	margin: 30px 0px 0px 18px;
+}
+
+#dollar9 {
+	margin: 82px 0px 0px 14px;
+}
+
+#dollar10 {
+	margin: 0px 0px 0px 0px;
+}
+
+
