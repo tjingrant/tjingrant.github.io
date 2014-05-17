@@ -40,7 +40,7 @@ a:focus {
 .container {
   margin-right: auto;
   margin-left: auto;
-  *zoom: 1;
+  zoom: 1;
   padding: 15px;
 }
 
