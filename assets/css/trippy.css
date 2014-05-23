@@ -33,6 +33,10 @@ body {
   background: #000 url(http://s.cdpn.io/1202/tree_bark.png);
   overflow: hidden;
   -webkit-animation: animation--background 2s linear infinite forwards;
+  -moz-animation: animation--background 2s linear infinite forwards;
+  -ms-animation: animation--background 2s linear infinite forwards;
+  -o-animation: animation--background 2s linear infinite forwards;
+  animation: animation--background 2s linear infinite forwards;
 }
 
 .trippy :after {
@@ -53,6 +57,54 @@ body {
   
   100% {
   	-webkit-transform: rotate(360deg);
+    background-position: 200em -10em;
+  }
+}
+
+@-moz-keyframes animation--background {
+  0% {
+    -moz-transform: rotate(0deg);
+    background-position: -200em 50em;
+  }
+  
+  100% {
+    -moz-transform: rotate(360deg);
+    background-position: 200em -10em;
+  }
+}
+
+@-ms-keyframes animation--background {
+  0% {
+    -ms-transform: rotate(0deg);
+    background-position: -200em 50em;
+  }
+  
+  100% {
+    -ms-transform: rotate(360deg);
+    background-position: 200em -10em;
+  }
+}
+
+@-o-keyframes animation--background {
+  0% {
+    -o-transform: rotate(0deg);
+    background-position: -200em 50em;
+  }
+  
+  100% {
+    -o-transform: rotate(360deg);
+    background-position: 200em -10em;
+  }
+}
+
+@keyframes animation--background {
+  0% {
+    transform: rotate(0deg);
+    background-position: -200em 50em;
+  }
+  
+  100% {
+    transform: rotate(360deg);
     background-position: 200em -10em;
   }
 }
