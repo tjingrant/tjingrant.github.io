@@ -2,31 +2,73 @@
 <html lang="en">
   <head>
     <meta charset="utf-8">
-    <title>Please Report</title>
+    <title>Open Letter to Tumblr, Wordpress</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="author" content="didyoueven">
     <link href="assets/css/main.css" rel="stylesheet">
-    <script src="assets/js/jquery-1.6.3.min.js"></script>
   </head>
 
   <body>
-  <div id="security" style="margin-top: 200px, text-align: center, cursor:pointer">
-    <h2> don't click here </h2>
-    <h1> SECURITY </h1>
-  </div>
+    <div class="container">
+      <div class="row">
+        <h1> How to Break Tumblr</h1>
+        <h2> Part 1 </h2>
+        <h2> Charles Jin and <a href="http://frankjwu.com">Frank Wu</a> </h2>
+      </div>
+      <div class="unit">
+        <div class="date"><p>
+          May 30, 2014
+        </p></div>
+        <div class="paragraph"><p>
+          Tumblr was broken, and all it took was the first two pages of Javascript 101.
+        </p></div>
+        <div class="paragraph"><p>
+          To be more specific, Tumblr's javascript santization system for content input was broken. Last week, we were designing a simple blogging feature for our product where musicians would be able to create a post and then have it displayed on their websites. We thought that they would very likely want to embed Youtube videos, Soundcloud content, Vimeo uploads, and other media into their blog posts, but to allow them to do so, it seemed like we would have to allow them to add  unsanitized script tags into their content. If we sanitize, legitimate sources like Youtube wouldn't run, but if we don't sanitize, malicious scripts would also be able to run.
+        </p></div>
+        <div class="paragraph"><p>
+          To us, this seemed extremely insecure, so we decided to investigate other websites and see how they handled this same issue.
+        </p></div>
+        <div class="paragraph"><p>
+          Wordpress and Tumblr were our first suspects and to our surprise, we found that both sites allowed users to embed whatever they wanted without sanitizing any of the content.
+        </p></div>
+        <div class="paragraph"><p>
+          To reproduce these exploits, literally all you had to do was log into tumblr, and create a post. Click the option for "html" and type the following in: 
+          <div class="code">
+            &lt;script&gt;alert("Hello World!")&lt;/script&gt;
+          </div>
+          And that's it! (Before Tumblr patches things up, <b><a href="http://sanitizemebro.tumblr.com" target="_blank"> this link </a></b>could show you what I'm talking about).
+        </p></div>
+        <div class="paragraph"><p>
+          Here's the weird part: Tumblr actually wrapped all the text inside the script tags inside a CDATA section. CDATA stands for "Character Data", which actually <i>helps</i> a hacker trying to inject malicious javascript into a post. Normal javascript has random characters in it that will screw with an XML parser (i.e. what is translating the source code of a webpage into what your browser is rendering). So it seems like Tumblr actually just never thought someone would try to embed javascript into a post.
+        </p></div>
+        <div class="paragraph"><p>
+          Who cares, you might think. Anyone could set up an annoying alert box on their own website, anyway. It's your domain, do what you want. Well here's the important part: these posts retain their ability to execute javascript even after being reblogged. So that annoying alert box <i>actually propogates to any unsuspecting follower</i>. For Wordpress.org blogs (self-hosted Wordpress instances), this isn't as big of a problem as it is with Wordpress.com and Tumblr blogs. On Wordpress.com and on Tumblr, the additional community features like reblogging and a discovery feed allows malicious content to spread extremely quickly and reach people who never directly opted-in to see it.
+        </p></div>
+        <div class="paragraph"><p>
+          Which means you could imagine writing a script that waits to execute - a "sleeper", if you will. Maybe you post a picture of a cat - the HTML content doesn't actually show up in the blog post (or the reblog interface, for that matter) - and set a timer for a week from today. No one knows any better, they think they're reblogging a kitten in a bunny costume. Then boom. Everyone's background picture is suddenly your worst enemy's baby photo.
+        </p></div>
+        <div class="paragraph"><p>
+          Other things we found out you could do: while jQuery doesn't work, you can still select DOM nodes using traditional javascript. For all you non-coders out there, that basically gives you the ability to manipulate the underlying HTML. So let's try something slightly more advanced:
+          <div class="code">
+            &lt;script&gt;<br>
+            <div class="code-indent">document.getElementById("header").children[0].innerHTML = "&lt;div class='title-group animate' style='text-align: center'&gt;&lt;h1&gt;HELLO TUMBLR DO YOU MISS YOUR BACKGROUND PHOTO??? TOO BAD.&lt;/h1&gt;&lt;/div&gt;"</div>
+            &lt;/script&gt;
+          </div>
+          What does this one do? It replaces all the HTML content on a particular DOM node with whatever I want. So in this case, I replaced the header with some obnoxious text.
+        </div>
+        <div class="paragraph"><p>
+          So far, none of this goes beyond slightly annoying. And for good reason - this isn't really a post knocking on Tumblr, so we don't really want people to get all weird trying to break Tumblr. However, we just wanted to point out one of the most dangerous - and easiest to implement - applications of this bug: <i>phishing</i>.
+          <div class="code">
+            &lt;script&gt;<br>
+            <div class="code-indent">window.open("http://charlesjin.com/security");</div>
+            &lt;/script&gt;
+          </div>
+          Yes, pop-up blockers have progressed. But, you could still tie a click event to a particular element (or just reappropriate an existing link), and open a window that looks exactly like Tumblr, Gmail, etc.
+        </p></div>
+        <div class="paragraph"><p>
+          This is by means no mean a condemnation of Tumblr and Wordpress exclusively. They just happened to be two of the sites with the largest user base, and hopefully they can disseminate the message further. We don't really have the time right now to go searching down every instance of a site that allows embedded HTML. Allowing styling on webpages is fine, so long as some smart sanitization function nukes all script tags before the message is posted. It's either that, or anything goes.
+        </p></div>
+      </div>
+    </div>
   </body>
 </html>
-
-
-<script>
-
-$("#security").click(function(){
-  window.open("//charlesjin.com/security");
-  $("#security").click();
-})
-
-$(document).ready(function(){
-  // $("#security").click();
-});
-
-</script>
