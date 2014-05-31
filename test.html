@@ -20,7 +20,7 @@
 
   <body>
 		<div class="container row">
-			<h1 style="font-size: 20px"></h1>
+			<h1></h1>
 		</div>
 	</body>
 </html>
@@ -30,7 +30,7 @@
 $(document).ready(function(){
 	window.addEventListener("message", receiveMessage, false);
 	function receiveMessage(event){
-		$("h1").append(event.data);
+		$("h1").append(event.data + "<br>");
 	};
 });
 
