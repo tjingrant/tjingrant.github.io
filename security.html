@@ -33,7 +33,7 @@
           Tumblr was broken, and all it took was the first two pages of Javascript 101.
         </div>
         <div class="paragraph">
-          To be more specific, Tumblr's javascript sanitization system for content input was broken. Last week, Frank and I were designing a simple blogging feature for our product where musicians would be able to create a post and then have it displayed on their websites. We thought that they would very likely want to embed Youtube videos, Soundcloud content, Vimeo uploads, and other media into their blog posts. This meant we had to make a decision about allowing users to embed potentially malicious HTML content. There seemed to be a trade-off: don't sanitize and allow all scripts to run, or sanitize and nothing gets through.
+          To be more specific, Tumblr's javascript sanitization system for content input was broken. A few days ago, Frank and I were designing a simple blogging feature for our product - it's a subscription-based service that helps musicians manage their interactions with fans (<a href="http://aflume.com">we're almost live!</a>). We thought that they would very likely want to include Youtube videos, Soundcloud content, Vimeo uploads, and other media in their blog posts. This meant we had to make a decision about allowing users to embed potentially malicious HTML content. There seemed to be a trade-off: don't sanitize and allow all scripts to run, or sanitize and nothing gets through.
         </div>
         <div class="paragraph">
           Neither of these seemed like good options, so we decided to investigate other websites and see how they handled this same issue.
@@ -62,7 +62,7 @@
           Which means you could imagine writing a script that waits to execute - a "sleeper", if you will. Maybe you post a picture of a cat - the HTML content doesn't actually show up in the blog post (or the reblog interface, for that matter) - and set a timer for a week from today. No one knows any better, they think they're reblogging a kitten in a bunny costume. Then boom. Everyone's background picture is suddenly your worst enemy's baby photo.
         </div>
         <div class="paragraph">
-          Other things we found out you could do: while jQuery doesn't work (we didn't try including google's hosted library), you can still select DOM nodes using traditional javascript. For all you non-coders out there, that basically gives you the ability to manipulate the underlying HTML. So let's try something slightly more advanced:
+          Other things we found out you could do: even without the jQuery library, you can still select DOM nodes using traditional javascript. For all you non-coders out there, that basically gives you the ability to manipulate the underlying HTML. So let's try something slightly more advanced:
           <div class="code">
             &lt;script&gt;<br>
             <div class="code-indent">document.getElementById("header").children[0].innerHTML = "&lt;div class='title-group animate' style='text-align: center'&gt;&lt;h1&gt;HELLO TUMBLR DO YOU MISS YOUR BACKGROUND PHOTO??? TOO BAD.&lt;/h1&gt;&lt;/div&gt;"</div>
@@ -107,7 +107,7 @@
           But what about iframes?
         </div>
         <div class="paragraph">
-          <b>iframes are special HTML element that allow for inline embedding of other documents (read: another webpage inside of your own website).</b> Youtube videos and the like are embedded this way - when you see a Youtube video on some other website, you're actually just loading a small portion of Youtube inside of the original webpage. The way iframes are set up, you cannot interact with elements within the iframe from outside the iframe - it's usually blocked due to cross-domain safety concerns. Because what's in the iframe is literally content from another webpage, you shouldn't be allowed to embed someone else's content on your site, then manipulate it yourself.
+          <b>iframes are special HTML element that allow for inline embedding of other documents (read: another webpage inside of your own website).</b> Youtube videos and the like are embedded this way - when you see a Youtube video on some other website, you're actually just loading a small portion of Youtube inside of the original webpage. The way iframes are set up, you cannot interact with elements within the iframe from outside the iframe - it's usually blocked due to cross-domain safety concerns. Because what's in the iframe is literally content from another webpage, <b>you shouldn't be allowed to embed someone else's content on your site, then manipulate it yourself, since it wasn't yours to begin with.</b>
         </div>
         <div class="paragraph">
           <b>The story is different, though, if you control both the parent AND the child documents.</b> The idea is that the developer should be able to communicate between the two html documents - for example, a lot of websites will display "Are you sure you want to navigate to another domain?" as something of a security check when clicking links (Exhibit A: Youtube). If you implement this via pop-up, you might want to know what the user clicks client-side as opposed to server-side (don't worry if that didn't make sense to you).
@@ -123,7 +123,7 @@
             <div class="code-indent">document.getElementById("header").addEventListener('click', function(e){alert("click!"); document.getElementById('test').contentWindow.postMessage ('hi', '*')}, false);</div>
             &lt;/script&gt;
           </div>
-          We've bound an event to the header section - to be specific, a "click". <b>Now, every time a "click" event is detected on the header, the parents frame - i.e. Tumblr - will send a message to the DOM element with ID "test".</b> Luckily, our iframe was set up exactly with this ID. 
+          We've bound an event to the header section - to be specific, a "click". <b>Now, every time a "click" event is detected on the header, the parent frame - i.e. Tumblr - will send a message to the DOM element with ID "test".</b> Luckily, our iframe was set up exactly with this ID. 
         </div>
 
         <div class="image"><img src="assets/img/tumblr_3.png" /></div>
@@ -150,14 +150,14 @@
           The scary part is there really isn't a good solution to this problem. <b>Because iframes originate from a different domain, there isn't much you can do to police what people will do from within iframes</b>. This means you can embed whatever malicious javscript you want - open a new window, phish, etc. - without any safeguards. The one caveat is you can't interact directly with the DOM, but that's barely an incovenience...
         </div>
         <div class="paragraph">
-          The best solution we've seen to this problem is how Facebook handles media in their newsfeed. Facebook has a whitelist of services for which they choose to render in-line media. For example, if you post a Youtube link, Facebook will add new div to your post, which is binded on click to make an AJAX call to pull up the Youtube iframe. Other services that have this special inline embed privelege include Soundcloud, Spotify, and Vimeo. Non-whitelisted services will just open in a new window, thereby preventing cross-domain scripting attacks
+          The best solution we've seen to this problem is how Facebook handles media in their newsfeed. Facebook has a whitelist of services for which they choose to render in-line media. For example, if you post a Youtube link, Facebook will add new div to your post, which is binded on click to make an AJAX call to pull up the Youtube iframe. Other services that have this special inline embed privelege include Soundcloud, Spotify, and Vimeo. Non-whitelisted services will just open in a new window, which means the extremely malicious content on charlesjin.com doesn't run in the same window as your Facebook account.
         </div>
         <div class="paragraph">
           There is one comforting fact: in the day we spent playing around, we didn't manage to get any of this behavior to show up in a user's feed. This means you'd have to navigate to the actual blog for this to happen. Which is actually a huge relief.
         </div>
         <h2>Closing Thoughts</h2>
         <div class="paragraph">
-          This is by means no mean a condemnation of Tumblr exclusively. They just happened to be two of the sites with the largest user base, and hopefully they can disseminate the message further. We don't really have the time right now to go searching down every instance of a site that allows embedded HTML. Allowing styling on webpages is fine, so long as some sanitization function nukes all script tags before the message is posted. It's either that, or anything goes.
+          This is by means no mean a condemnation of Tumblr exclusively. They just happened to the site that first came to mind, with a pretty sizeable user base to boot. <b>Our hope is that this message will get disseminated further - we don't really have the time right now to go searching down every instance of a site that allows embedded HTML.</b> Allowing styling on webpages is fine, so long as some sanitization function nukes all script tags before the message is posted. It's either that, or anything goes.
         </div>
         <div class=margin>
           <p>(c) 2014 Charles Jin</p>
