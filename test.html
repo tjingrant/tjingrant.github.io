@@ -11,7 +11,7 @@
 
   <body>
 		<div class="container row">
-			<h1><a onclick="parent.test();" href="#">CLICK HERE!!</a></h1>
+			<h1></h1>
 		</div>
 	</body>
 </html>
@@ -23,7 +23,7 @@ $(document).ready(function(){
 	window.addEventListener("message", receiveMessage, false);
 
 	function receiveMessage(event){
-		console.log(event.data);
+		$("h1").append(event.data);
 	};
 
 });
