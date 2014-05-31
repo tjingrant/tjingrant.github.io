@@ -91,13 +91,13 @@
         </div>
 
         <div class="paragraph">
-          So far, none of this goes beyond slightly annoying. And for good reason - this isn't really a post knocking on Tumblr, so we don't really want people to get all weird trying to break Tumblr. However, <b>we just wanted to point out one of the most dangerous - and easiest to implement - applications of this bug: <i>phishing</i>.</b>
+          So far, none of this goes beyond slightly annoying. And for good reason - this isn't really a post knocking on Tumblr, so I don't really want people to get all weird trying to break Tumblr. However, <b>I still want to point out one of the most dangerous - and easiest to implement - applications of this bug: <i>phishing</i>.</b>
           <div class="code">
             &lt;script&gt;<br>
             <div class="code-indent">window.open("http://charlesjin.com/security");</div>
             &lt;/script&gt;
           </div>
-          Yes, pop-up blockers have progressed. But, you could still tie a click event to a particular element (or just reappropriate an existing link), and open a window that looks exactly like Tumblr, Gmail, etc.
+          Yes, pop-up blockers have progressed. But, you could still tie a click event to a particular element (or just reappropriate an existing link), and open a window that looks exactly like Tumblr, Gmail, etc. To close out this section, one last oddity: Tumblr's warning message for account phishing is also stored in a javascript variable "translated_warning_string". I'm not too sure when that warning message gets triggered, but you can easily overwrite it with your own official-sounding message.
         </div>
         <h2> Check Your Sources: iframes </h2>
         <div class="paragraph">
