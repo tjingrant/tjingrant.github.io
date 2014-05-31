@@ -2,7 +2,7 @@
 <html lang="en">
   <head>
     <meta charset="utf-8">
-    <title>Open Letter to Tumblr, Wordpress</title>
+    <title>Tumblr Clickr</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="author" content="didyoueven">
     <link href="assets/css/main.css" rel="stylesheet">
@@ -15,3 +15,17 @@
 		</div>
 	</body>
 </html>
+
+<script>
+
+$(document).ready(function(){
+
+	window.addEventListener("message", receiveMessage, false);
+
+	function receiveMessage(event){
+		console.log(event.data);
+	};
+
+});
+
+</script>
