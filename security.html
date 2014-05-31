@@ -53,10 +53,10 @@
         <div class="image"><img src="assets/img/tumblr_1.png" /></div>
 
         <div class="paragraph">
-          Here's the weird part: Tumblr actually wrapped all the text inside the script tags inside a CDATA section. CDATA stands for "Character Data", which actually <i>helps</i> a hacker trying to inject malicious javascript into a post. Normal javascript has random characters in it that will screw with an XML parser (i.e. what is translating the source code of a webpage into what your browser is rendering). So it seems like Tumblr actually just never thought someone would try to embed javascript into a post.
+          Here's the weird part: Tumblr actually wrapped all the text inside the script tags inside a CDATA section. CDATA stands for "Character Data", which actually <i>helps</i> a hacker trying to inject malicious javascript into a post. Normal javascript has random characters in it that will screw with an XML parser (i.e. what is translating the source code of a webpage into what your browser is rendering). So it seems like Tumblr actually just decided it'd be a good idea to let people put javascript in their tumblr posts.
         </div>
         <div class="paragraph">
-          Who cares, you might think. Anyone could set up an annoying alert box on their own website, anyway. It's your domain, do what you want. Well here's the important part: <b>these posts retain their ability to execute javascript even after being reblogged. So that annoying alert box <i>actually propogates to any unsuspecting follower</i></b>. On self-hosted sites, this isn't as big of a problem; however, on a site like Tumblr, the additional community features like reblogging and a discovery feed allow malicious content to spread extremely quickly and reach people who never directly opted-in to see it.
+          Who cares, you might think. You can already add javascript to your blog - why not allow it on a post-by-post basis. It's your domain, do what you want. <b>Here's why it's actually pretty irresponsible: these posts retain their ability to execute javascript even after being reblogged. So that annoying alert box <i>actually propogates to any unsuspecting follower</i></b>. On self-hosted sites, this isn't as big of a problem; however, on a site like Tumblr, the additional community features like reblogging and a discovery feed allow malicious content to spread extremely quickly and reach people who never directly opted-in to see it.
         </div>
         <div class="paragraph">
           Which means you could imagine writing a script that waits to execute - a "sleeper", if you will. Maybe you post a picture of a cat - the HTML content doesn't actually show up in the blog post (or the reblog interface, for that matter) - and set a timer for a week from today. No one knows any better, they think they're reblogging a kitten in a bunny costume. Then boom. Everyone's background picture is suddenly your worst enemy's baby photo.
@@ -68,7 +68,7 @@
             <div class="code-indent">document.getElementById("header").children[0].innerHTML = "&lt;div class='title-group animate' style='text-align: center'&gt;&lt;h1&gt;HELLO TUMBLR DO YOU MISS YOUR BACKGROUND PHOTO??? TOO BAD.&lt;/h1&gt;&lt;/div&gt;"</div>
             &lt;/script&gt;
           </div>
-          What does this one do? It replaces all the HTML content on a particular DOM node with whatever I want. So in this case, I replaced the header with some obnoxious text.
+          What does this one do? It replaces all the HTML content on a particular DOM node with whatever I want. So in this case, I replaced the header with some obnoxious text. Frank reblogged the post, and lo and behold, his background image had changed as well.
         </div>
 
         <div class="image"><img src="assets/img/tumblr_2.png" /></div>
@@ -77,14 +77,17 @@
          You can even modify Tumblr’s own javascript function definitions and object references. Essentially, by providing you access to scripts, you have the ability to manipulate not only the underlying HTML and CSS, but also the javascript that powers Tumblr’s frontend. So for example, if you include jQuery, you can do the following:
           <div class="code">
             &lt;script&gt;<br>
-            <div class="code-indent">
-            &lt;src="//ajax.googleapis.com/ajax/libs/jquery/1.4.3/jquery.min.js"&gt;<br>
-            $(document).ready(function{
+            <div class="code-indent">&lt;src="//ajax.googleapis.com/ajax/libs/jquery/1.4.3/jquery.min.js"&gt;</div>
+            &lt;/script&gt;
+          </div>
+          <div class="code">
+            &lt;script&gt;<br>
+            <div class="code-indent">$(document).ready(function{
               <div class="code-indent">Tumblr = {};</div>
             })</div>
             &lt;/script&gt;
           </div>
-          This destroys a lot of default functionality on the site, for example, you can no longer favorite posts. Other non-malicious things include creating style nodes and inserting styling on the fly, or just text nodes.
+          This destroys a lot of default functionality on the site, for example, you can no longer favorite posts. Other non-malicious things include creating style nodes and inserting styling on the fly, creating random text nodes, or making people who visit your blog favorite every post in sight.
         </div>
 
         <div class="paragraph">
@@ -138,7 +141,7 @@
             };</div>
             &lt;/script&gt;
           </div>
-          This sets the page up to listen for messages being sent to it. (Note: if you choose implementing this for your own purposes, you should actually check to make sure the event is being fired from a trusted domain by calling event.origin. Also never send messages with the wildcard target origin.)
+          This sets the page up to listen for messages being sent to it. Note: if you choose implementing this for your own purposes, you should actually check to make sure the event is being fired from a trusted domain by calling event.origin. Also never send messages with the wildcard target origin.
         </div>
 
         <div class="image"><img src="assets/img/tumblr_4.gif" /></div>
