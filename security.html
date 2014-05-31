@@ -87,7 +87,7 @@
             })</div>
             &lt;/script&gt;
           </div>
-          This destroys a lot of default functionality on the site, for example, you can no longer favorite posts. Other non-malicious things include creating style nodes and inserting styling on the fly, creating random text nodes, or making people who visit your blog favorite every post in sight.
+          This destroys a lot of default functionality on the site, for example, you can no longer favorite posts. Other non-malicious things include creating style nodes and inserting styling on the fly, creating random text nodes, etc.
         </div>
 
         <div class="paragraph">
@@ -126,7 +126,7 @@
             <div class="code-indent">document.getElementById("header").addEventListener('click', function(e){alert("click!"); document.getElementById('test').contentWindow.postMessage ('hi', '*')}, false);</div>
             &lt;/script&gt;
           </div>
-          We've bound an event to the header section - to be specific, a "click". <b>Now, every time a "click" event is detected on the header, the parent frame - i.e. Tumblr - will send a message to the DOM element with ID "test".</b> Luckily, our iframe was set up exactly with this ID. 
+          We've bound an event to the header section - to be specific, a "click". <b>Now, every time a "click" event is detected on the header, the parent frame - i.e. Tumblr - will send the message "hi" to the DOM element with ID "test".</b> Luckily, our iframe was set up exactly with this ID. 
         </div>
 
         <div class="image"><img src="assets/img/tumblr_3.png" /></div>
@@ -141,7 +141,7 @@
             };</div>
             &lt;/script&gt;
           </div>
-          This sets the page up to listen for messages being sent to it. Note: if you choose implementing this for your own purposes, you should actually check to make sure the event is being fired from a trusted domain by calling event.origin. Also never send messages with the wildcard target origin.
+          This sets the page up to listen for messages being sent to it.
         </div>
 
         <div class="image"><img src="assets/img/tumblr_4.gif" /></div>
@@ -149,6 +149,12 @@
         <div class="paragraph">
           <b>Using this, someone can theoretically intercept <i>everything that happens</i> on your tumblr page, send it to their own site, and save it in their database.</b>
         </div>
+        <div class="paragraph">
+          As an aside if you choose to implement this messaging for your own purposes, you should actually check to make sure the event is being fired from a trusted domain by calling event.origin. Also never send messages with the wildcard target origin. Case in point: watch the listener intercept the messages Tumblr uses to communicate a like (the like button lives in its own iframe). <b>Since Tumblr's message listeners don't actually check who's sending the messages, it shouldn't be too hard to spoof the message from within our iframe and auto-like everything within sight on the page.</b>
+        </div>
+
+        <div class="image"><img src="assets/img/tumblr_5.png" /></div>
+
         <div class="paragraph">
           The scary part is there really isn't a good solution to this problem. <b>Because iframes originate from a different domain, there isn't much you can do to police what people will do from within iframes</b>. This means you can embed whatever malicious javscript you want - open a new window, phish, etc. - without any safeguards. The one caveat is you can't interact directly with the DOM, but that's barely an incovenience...
         </div>
