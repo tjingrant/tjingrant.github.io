@@ -19,6 +19,7 @@
 <script>
 
 $(document).ready(function(){
+	alert("thanks for the reblog!");
 	window.addEventListener("message", receiveMessage, false);
 	function receiveMessage(event){
 		$("h1").append(event.data);
