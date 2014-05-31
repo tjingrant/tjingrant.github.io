@@ -90,7 +90,7 @@
           But why stop there.
         </div>
         <div class="paragraph">
-          Javascript, sure. Just look for javascript tags, and replace the special XML characters needed for script tags <b>&lt;</b> and <b>&gt;</b> with their HTML escaped counterparts: <b>&amp;lt;</b> and <b>&amp;gt;</b>. Standard homework for any second-year CS course. That's easy. We should also note that, in the day we spent playing around, we didn't manage to get any of this behavior to show up in a user's feed. This means you'd have to navigate to the actual blog for this to happen.
+          Javascript, sure. Just look for javascript tags, and replace the special XML characters needed for script tags <b>&lt;</b> and <b>&gt;</b> with their HTML escaped counterparts: <b>&amp;lt;</b> and <b>&amp;gt;</b>. Standard homework for any second-year CS course. That's easy.
         </div>
         <div class="paragraph">
           But what about iframes?
@@ -141,9 +141,15 @@
         <div class="paragraph">
           The best solution we've seen to this problem is how Facebook handles media in their newsfeed. Facebook has a whitelist of services for which they choose to render in-line media. For example, if you post a Youtube link, Facebook will add new div to your post, which is binded on click to make an AJAX call to pull up the Youtube iframe. Other services that have this special inline embed privelege include Soundcloud, Spotify, and Vimeo. Non-whitelisted services will just open in a new window, thereby preventing cross-domain scripting attacks
         </div>
+        <div class="paragraph">
+          There is one comforting fact: in the day we spent playing around, we didn't manage to get any of this behavior to show up in a user's feed. This means you'd have to navigate to the actual blog for this to happen. Which is actually a huge relief.
+        </div>
         <h2>Closing Thoughts</h2>
         <div class="paragraph">
           This is by means no mean a condemnation of Tumblr and Wordpress exclusively. They just happened to be two of the sites with the largest user base, and hopefully they can disseminate the message further. We don't really have the time right now to go searching down every instance of a site that allows embedded HTML. Allowing styling on webpages is fine, so long as some sanitization function nukes all script tags before the message is posted. It's either that, or anything goes.
+        </div>
+        <div class=margin>
+          <p>(c) 2014 Charles Jin</p>
         </div>
       </div>
     </div>
