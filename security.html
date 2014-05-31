@@ -150,7 +150,7 @@
           <b>Using this, someone can theoretically intercept <i>everything that happens</i> on your tumblr page, send it to their own site, and save it in their database.</b>
         </div>
         <div class="paragraph">
-          As an aside if you choose to implement this messaging for your own purposes, you should actually check to make sure the event is being fired from a trusted domain by calling event.origin. Also never send messages with the wildcard target origin. Case in point: watch the listener intercept the messages Tumblr uses to communicate a like (the like button lives in its own iframe). <b>Since Tumblr's message listeners don't actually check who's sending the messages, it shouldn't be too hard to spoof the message from within our iframe and auto-like everything within sight on the page.</b>
+          As an aside, if you choose to implement this sort of communication scheme for your own purposes, you should actually check to make sure the event is being fired from a trusted domain by calling event.origin. Also never send messages with the wildcard target origin. Case in point: watch the listener I set up within my iframe intercept the messages Tumblr uses to communicate a like (the like button lives in its own iframe). <b>Since Tumblr's message listeners don't actually check who's sending the messages, it shouldn't be too hard to spoof the message from within our iframe and auto-like everything within sight on the page.</b>
         </div>
 
         <div class="image"><img src="assets/img/tumblr_5.png" /></div>
