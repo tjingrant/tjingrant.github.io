@@ -22,7 +22,7 @@
           Tumblr was broken, and all it took was the first two pages of Javascript 101.
         </div>
         <div class="paragraph">
-          To be more specific, Tumblr's javascript sanitization system for content input was broken. Last week, Frank and I were designing a simple blogging feature for our product where musicians would be able to create a post and then have it displayed on their websites. We thought that they would very likely want to embed Youtube videos, Soundcloud content, Vimeo uploads, and other media into their blog posts. There seemed to be a trade-off: don't sanitize and allow all scripts to run, or sanitize and nothing gets through.
+          To be more specific, Tumblr's javascript sanitization system for content input was broken. Last week, Frank and I were designing a simple blogging feature for our product where musicians would be able to create a post and then have it displayed on their websites. We thought that they would very likely want to embed Youtube videos, Soundcloud content, Vimeo uploads, and other media into their blog posts. This meant we had to make a decision about allowing users to embed potentially malicious HTML content. There seemed to be a trade-off: don't sanitize and allow all scripts to run, or sanitize and nothing gets through.
         </div>
         <div class="paragraph">
           Neither of these seemed like good options, so we decided to investigate other websites and see how they handled this same issue.
