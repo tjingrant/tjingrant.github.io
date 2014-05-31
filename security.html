@@ -22,7 +22,7 @@
           Tumblr was broken, and all it took was the first two pages of Javascript 101.
         </div>
         <div class="paragraph">
-          To be more specific, Tumblr's javascript santization system for content input was broken. Last week, we were designing a simple blogging feature for our product where musicians would be able to create a post and then have it displayed on their websites. We thought that they would very likely want to embed Youtube videos, Soundcloud content, Vimeo uploads, and other media into their blog posts, but to allow them to do so, it seemed like we would have to allow them to add  unsanitized script tags into their content. If we sanitize, legitimate sources like Youtube wouldn't run, but if we don't sanitize, malicious scripts would also be able to run.
+          To be more specific, Tumblr's javascript sanitization system for content input was broken. Last week, Frank and I were designing a simple blogging feature for our product where musicians would be able to create a post and then have it displayed on their websites. We thought that they would very likely want to embed Youtube videos, Soundcloud content, Vimeo uploads, and other media into their blog posts, but to allow them to do so, it seemed like we would have to allow them to add  unsanitized script tags into their content. If we sanitize, legitimate sources like Youtube wouldn't run, but if we don't sanitize, malicious scripts would also be able to run.
         </div>
         <div class="paragraph">
           To us, this seemed extremely insecure, so we decided to investigate other websites and see how they handled this same issue.
@@ -36,8 +36,11 @@
           <div class="code">
             &lt;script&gt;alert("Hello World!")&lt;/script&gt;
           </div>
-          And that's it! (Before Tumblr patches things up, <b><a href="http://sanitizemebro.tumblr.com" target="_blank"> this link </a></b>could show you what I'm talking about).
+          And that's it! (Before Tumblr patches things up, <b><a href="http://sanitizemebro.tumblr.com" target="_blank"> this link </a></b>could show you what happens.
         </div>
+
+        <div class="image"><img src="assets/img/tumblr_1.png" /></div>
+
         <div class="paragraph">
           Here's the weird part: Tumblr actually wrapped all the text inside the script tags inside a CDATA section. CDATA stands for "Character Data", which actually <i>helps</i> a hacker trying to inject malicious javascript into a post. Normal javascript has random characters in it that will screw with an XML parser (i.e. what is translating the source code of a webpage into what your browser is rendering). So it seems like Tumblr actually just never thought someone would try to embed javascript into a post.
         </div>
@@ -56,6 +59,9 @@
           </div>
           What does this one do? It replaces all the HTML content on a particular DOM node with whatever I want. So in this case, I replaced the header with some obnoxious text.
         </div>
+
+        <div class="image"><img src="assets/img/tumblr_2.png" /></div>
+
         <div class="paragraph">
           So far, none of this goes beyond slightly annoying. And for good reason - this isn't really a post knocking on Tumblr, so we don't really want people to get all weird trying to break Tumblr. However, we just wanted to point out one of the most dangerous - and easiest to implement - applications of this bug: <i>phishing</i>.
           <div class="code">
@@ -64,6 +70,19 @@
             &lt;/script&gt;
           </div>
           Yes, pop-up blockers have progressed. But, you could still tie a click event to a particular element (or just reappropriate an existing link), and open a window that looks exactly like Tumblr, Gmail, etc.
+        </div>
+        <div class="paragraph">
+          Other things we found out you could do: you can load external javascript libraries like jQuery, you can still select DOM nodes using traditional javascript, and you can even modify Tumblr’s own javascript function definitions and object references. Essentially, by providing you access to scripts, you have the ability to manipulate not only the underlying HTML and CSS, but also the javascript that powers Tumblr’s frontend. So for example, if you include jQuery, you can do the following:
+          <div class="code">
+            &lt;script&gt;<br>
+            <div class="code-indent">
+            &lt;src="//ajax.googleapis.com/ajax/libs/jquery/1.4.3/jquery.min.js"&gt;<br>
+            $(document).ready(function{
+              <div class="code-indent">Tumblr = {};</div>
+            })</div>
+            &lt;/script&gt;
+          </div>
+          Other non-malicious things include creating style nodes and inserting styling on the fly, or just text nodes.
         </div>
         <h2> Check Your Sources: iframes </h2>
         <div class="paragraph">
@@ -92,7 +111,13 @@
             <div class="code-indent">document.getElementById("header").addEventListener('click', function(e){alert("click!"); document.getElementById('test').contentWindow.postMessage ('hi', '*')}, false);</div>
             &lt;/script&gt;
           </div>
-          We've bound an event to the header section - to be specific, a "click". Now, every time a "click" event is detected on the header, the parents frame - i.e. Tumblr - will send a message to the DOM element with ID "test". Luckily, our iframe was set up exactly with this ID. FInally, to recieve this message, I have on my webpage
+          We've bound an event to the header section - to be specific, a "click". Now, every time a "click" event is detected on the header, the parents frame - i.e. Tumblr - will send a message to the DOM element with ID "test". Luckily, our iframe was set up exactly with this ID. 
+        </div>
+
+        <div class="image"><img src="assets/img/tumblr_3.png" /></div>
+
+        <div class="paragraph">
+          FInally, to recieve this message, I have on my webpage
           <div class="code">
             &lt;script&gt;<br>
             <div class="code-indent">window.addEventListener("message", receiveMessage, false);<br>
@@ -103,8 +128,11 @@
           </div>
           This sets the page up to listen for messages being sent to it. (Note: if you choose implementing this for your own purposes, you should actually check to make sure the event is being fired from a trusted domain by calling event.origin. Also never send messages with the wildcard target origin.)
         </div>
+
+        <div class="image"><img src="assets/img/tumblr_4.gif" /></div>
+
         <div class="paragraph">
-          Using this, someone can theoretically intercept <i>everything that happens</i> on your tumblr feed, send it to their own site, and save it in their database.
+          Using this, someone can theoretically intercept <i>everything that happens</i> on your tumblr page, send it to their own site, and save it in their database.
         </div>
         <div class="paragraph">
           The scary part is there really isn't a good solution to this problem. <b>Because iframes originate from a different domain, there isn't much you can do to police what people will do from within iframes</b>. This means you can embed whatever malicious javscript you want - open a new window, phish, etc. - without any safeguards. The one caveat is you can't interact directly with the DOM, but that's barely an incovenience...
