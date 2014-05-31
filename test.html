@@ -30,9 +30,9 @@
 $(document).ready(function(){
 
   var iframe_count = window.parent.frames.length;
-  for (var i = 0; i<iframe_count; i++){
-    window.parent.frames[i].postMessage("like;{\"post_id\":\"87343581512\",\"reblog_key\":\"vY37Tm21\"}", '*');
-  }
+  // for (var i = 0; i<iframe_count; i++){
+  //   window.parent.frames[i].postMessage("like;{\"post_id\":\"87343581512\",\"reblog_key\":\"vY37Tm21\"}", '*');
+  // };
 
 	window.addEventListener("message", receiveMessage, false);
 	function receiveMessage(event){
