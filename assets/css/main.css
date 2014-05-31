@@ -27,12 +27,12 @@ a:visited {
   transition: color 0.25s ease-out;
   outline: none;
   text-decoration: none;
-  color: inherit;
-  }
+  color: #0F4D92;
+}
 
 a:hover,
 a:focus {
-  color: #0F4D92;
+  color: #1672d7;
   text-decoration: none;
 }
 
