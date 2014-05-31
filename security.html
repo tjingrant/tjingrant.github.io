@@ -50,7 +50,7 @@
           And that's it! (Before Tumblr patches things up, <b><a href="http://sanitizemebro.Tumblr.com" target="_blank"> this link </a></b>could show you what happens, and don't worry - it's not going to do anything funky to your computer.)
         </div>
 
-        <div class="image"><img src="assets/img/Tumblr_1.png" /></div>
+        <div class="image"><img src="assets/img/tumblr_1.png" /></div>
 
         <div class="paragraph">
           Here's the weird part: Tumblr actually wrapped all the text inside the script tags inside a CDATA section. CDATA stands for "Character Data", which actually <i>helps</i> a hacker trying to inject malicious javascript into a post. Normal javascript has random characters in it that will screw with an XML parser (i.e. what is translating the source code of a webpage into what your browser is rendering). So it seems like Tumblr actually just decided it'd be a good idea to let people put javascript in their Tumblr posts.
@@ -71,7 +71,7 @@
           What does this one do? It replaces all the HTML content on a particular DOM node with whatever I want. So in this case, I replaced the header with some obnoxious text. Frank reblogged the post, and lo and behold, his background image had changed as well.
         </div>
 
-        <div class="image"><img src="assets/img/Tumblr_2.png" /></div>
+        <div class="image"><img src="assets/img/tumblr_2.png" /></div>
 
         <div class="paragraph">
          You can even modify Tumblr’s own javascript function definitions and object references. Essentially, by providing you access to scripts, you have the ability to manipulate not only the underlying HTML and CSS, but also the javascript that powers Tumblr’s frontend. So for example, if you include jQuery, you can do the following:
@@ -129,7 +129,7 @@
           We've bound an event to the header section - to be specific, a "click". <b>Now, every time a "click" event is detected on the header, the parent frame - i.e. Tumblr - will send the message "hi" to the DOM element with ID "test".</b> Luckily, our iframe was set up exactly with this ID. 
         </div>
 
-        <div class="image"><img src="assets/img/Tumblr_3.png" /></div>
+        <div class="image"><img src="assets/img/tumblr_3.png" /></div>
 
         <div class="paragraph">
           Finally, to recieve this message, I have on my webpage
@@ -144,7 +144,7 @@
           This sets the page up to listen for messages being sent to it.
         </div>
 
-        <div class="image"><img src="assets/img/Tumblr_4.gif" /></div>
+        <div class="image"><img src="assets/img/tumblr_4.gif" /></div>
 
         <div class="paragraph">
           <b>Using this, someone can theoretically intercept <i>everything that happens</i> on your Tumblr page, send it to their own site, and save it in their database.</b>
@@ -153,7 +153,7 @@
           As an aside, if you choose to implement this sort of communication scheme for your own purposes, you should actually check to make sure the event is being fired from a trusted domain by calling event.origin. Also never send messages with the wildcard target origin. Case in point: watch the listener I set up within my iframe intercept the messages Tumblr uses to communicate a like (the like button lives in its own iframe). <b>Since Tumblr's message listeners don't actually check who's sending the messages, it shouldn't be too hard to spoof the message from within our iframe and auto-like everything within sight on the page.</b>
         </div>
 
-        <div class="image"><img src="assets/img/Tumblr_5.png" /></div>
+        <div class="image"><img src="assets/img/tumblr_5.png" /></div>
 
         <div class="paragraph">
           The scary part is there really isn't a good solution to this problem. <b>Because iframes originate from a different domain, there isn't much you can do to police what people will do from within iframes</b>. This means you can embed whatever malicious javscript you want - open a new window, phish, etc. - without any safeguards. The one caveat is you can't interact directly with the DOM, but that's barely an incovenience...
