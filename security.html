@@ -43,17 +43,17 @@
         </div>
         <h2> Sanitize Me Bro: Javascript </h2>
         <div class="paragraph">
-          To reproduce these exploits, literally all you had to do was log into tumblr, and create a post. Click the option for "html" and type the following in: 
+          To reproduce these exploits, literally all you had to do was log into Tumblr, and create a post. Click the option for "html" and type the following in: 
           <div class="code">
             &lt;script&gt;alert("Hello World!")&lt;/script&gt;
           </div>
-          And that's it! (Before Tumblr patches things up, <b><a href="http://sanitizemebro.tumblr.com" target="_blank"> this link </a></b>could show you what happens, and don't worry - it's not going to do anything funky to your computer.)
+          And that's it! (Before Tumblr patches things up, <b><a href="http://sanitizemebro.Tumblr.com" target="_blank"> this link </a></b>could show you what happens, and don't worry - it's not going to do anything funky to your computer.)
         </div>
 
-        <div class="image"><img src="assets/img/tumblr_1.png" /></div>
+        <div class="image"><img src="assets/img/Tumblr_1.png" /></div>
 
         <div class="paragraph">
-          Here's the weird part: Tumblr actually wrapped all the text inside the script tags inside a CDATA section. CDATA stands for "Character Data", which actually <i>helps</i> a hacker trying to inject malicious javascript into a post. Normal javascript has random characters in it that will screw with an XML parser (i.e. what is translating the source code of a webpage into what your browser is rendering). So it seems like Tumblr actually just decided it'd be a good idea to let people put javascript in their tumblr posts.
+          Here's the weird part: Tumblr actually wrapped all the text inside the script tags inside a CDATA section. CDATA stands for "Character Data", which actually <i>helps</i> a hacker trying to inject malicious javascript into a post. Normal javascript has random characters in it that will screw with an XML parser (i.e. what is translating the source code of a webpage into what your browser is rendering). So it seems like Tumblr actually just decided it'd be a good idea to let people put javascript in their Tumblr posts.
         </div>
         <div class="paragraph">
           Who cares, you might think. You can already add javascript to your blog - why not allow it on a post-by-post basis. It's your domain, do what you want. <b>Here's why it's actually pretty irresponsible: these posts retain their ability to execute javascript even after being reblogged. So that annoying alert box <i>actually propogates to any unsuspecting follower</i></b>. On self-hosted sites, this isn't as big of a problem; however, on a site like Tumblr, the additional community features like reblogging and a discovery feed allow malicious content to spread extremely quickly and reach people who never directly opted-in to see it.
@@ -65,13 +65,13 @@
           Other things we found out you could do: even without the jQuery library, you can still select DOM nodes using traditional javascript. For all you non-coders out there, that basically gives you the ability to manipulate the underlying HTML. So let's try something slightly more advanced:
           <div class="code">
             &lt;script&gt;<br>
-            <div class="code-indent">document.getElementById("header").children[0].innerHTML = "&lt;div class='title-group animate' style='text-align: center'&gt;&lt;h1&gt;HELLO TUMBLR DO YOU MISS YOUR BACKGROUND PHOTO??? TOO BAD.&lt;/h1&gt;&lt;/div&gt;"</div>
+            <div class="code-indent">document.getElementById("header").children[0].innerHTML = "&lt;div class='title-group animate' style='text-align: center'&gt;&lt;h1&gt;HELLO Tumblr DO YOU MISS YOUR BACKGROUND PHOTO??? TOO BAD.&lt;/h1&gt;&lt;/div&gt;"</div>
             &lt;/script&gt;
           </div>
           What does this one do? It replaces all the HTML content on a particular DOM node with whatever I want. So in this case, I replaced the header with some obnoxious text. Frank reblogged the post, and lo and behold, his background image had changed as well.
         </div>
 
-        <div class="image"><img src="assets/img/tumblr_2.png" /></div>
+        <div class="image"><img src="assets/img/Tumblr_2.png" /></div>
 
         <div class="paragraph">
          You can even modify Tumblr’s own javascript function definitions and object references. Essentially, by providing you access to scripts, you have the ability to manipulate not only the underlying HTML and CSS, but also the javascript that powers Tumblr’s frontend. So for example, if you include jQuery, you can do the following:
@@ -116,7 +116,7 @@
           <b>The story is different, though, if you control both the parent AND the child documents.</b> The idea is that the developer should be able to communicate between the two html documents - for example, a lot of websites will display "Are you sure you want to navigate to another domain?" as something of a security check when clicking links (Exhibit A: Youtube). If you implement this via pop-up, you might want to know what the user clicks client-side as opposed to server-side (don't worry if that didn't make sense to you).
         </div>
         <div class="paragraph">
-          With this in mind, I tried to send a basic message from outside the iframe into the iframe. The following set up will send the message "hi" to the iframe upon clicking the header element of the tumblr - i.e. the section where the background image was until I replaced it. Inside the iframe, the message "hi" will display as the heading. To reproduce, make a video post, and in the embed section, put the following code:
+          With this in mind, I tried to send a basic message from outside the iframe into the iframe. The following set up will send the message "hi" to the iframe upon clicking the header element of the Tumblr - i.e. the section where the background image was until I replaced it. Inside the iframe, the message "hi" will display as the heading. To reproduce, make a video post, and in the embed section, put the following code:
           <div class="code">
           &lt;iframe id="test" width="560" height="315" src="//www.charlesjin.com/test" frameborder="0"&gt;&lt;/iframe&gt;
           </div>
@@ -129,7 +129,7 @@
           We've bound an event to the header section - to be specific, a "click". <b>Now, every time a "click" event is detected on the header, the parent frame - i.e. Tumblr - will send the message "hi" to the DOM element with ID "test".</b> Luckily, our iframe was set up exactly with this ID. 
         </div>
 
-        <div class="image"><img src="assets/img/tumblr_3.png" /></div>
+        <div class="image"><img src="assets/img/Tumblr_3.png" /></div>
 
         <div class="paragraph">
           Finally, to recieve this message, I have on my webpage
@@ -144,16 +144,16 @@
           This sets the page up to listen for messages being sent to it.
         </div>
 
-        <div class="image"><img src="assets/img/tumblr_4.gif" /></div>
+        <div class="image"><img src="assets/img/Tumblr_4.gif" /></div>
 
         <div class="paragraph">
-          <b>Using this, someone can theoretically intercept <i>everything that happens</i> on your tumblr page, send it to their own site, and save it in their database.</b>
+          <b>Using this, someone can theoretically intercept <i>everything that happens</i> on your Tumblr page, send it to their own site, and save it in their database.</b>
         </div>
         <div class="paragraph">
           As an aside, if you choose to implement this sort of communication scheme for your own purposes, you should actually check to make sure the event is being fired from a trusted domain by calling event.origin. Also never send messages with the wildcard target origin. Case in point: watch the listener I set up within my iframe intercept the messages Tumblr uses to communicate a like (the like button lives in its own iframe). <b>Since Tumblr's message listeners don't actually check who's sending the messages, it shouldn't be too hard to spoof the message from within our iframe and auto-like everything within sight on the page.</b>
         </div>
 
-        <div class="image"><img src="assets/img/tumblr_5.png" /></div>
+        <div class="image"><img src="assets/img/Tumblr_5.png" /></div>
 
         <div class="paragraph">
           The scary part is there really isn't a good solution to this problem. <b>Because iframes originate from a different domain, there isn't much you can do to police what people will do from within iframes</b>. This means you can embed whatever malicious javscript you want - open a new window, phish, etc. - without any safeguards. The one caveat is you can't interact directly with the DOM, but that's barely an incovenience...
