@@ -198,8 +198,19 @@ $(document).ready(function(){
   $(".click-more").click(function(){
     $(".view1").hide(0, function(){
       $(".view2").show();
+      body_sizer();
+      $(window).resize(body_sizer);
     });
   });
 });
+
+function body_sizer(){
+  var width = $(window).width();
+  if (width < 650){
+    $(".unit").css({ "padding" : (width-450)/650*195 })
+  } else {
+    $(".unit").css({ "padding" : 60 })
+  }
+}
 
 </script>
