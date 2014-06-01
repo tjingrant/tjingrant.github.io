@@ -208,7 +208,7 @@ function body_sizer(){
   var width = $(window).width();
   if (width < 650){
     $(".unit").css({ "padding" : (width-450)/650*195 });
-    $(".code").css({ "margin" : "10px " + (width-500)/650*130 + "px" });
+    $(".code").css({ "margin" : "10px " + Math.max(0, (width-500)/650*130) + "px" });
   } else {
     $(".unit").css({ "padding" : 60 });
     $(".code").css({ "margin" : "10px 30px" });
