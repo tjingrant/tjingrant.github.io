@@ -12,6 +12,8 @@ div {
 h1 {
   font-size: 1em;
   font-weight: bold;
+  color: navy;
+  background-color: transparent;
   margin: .67em 0;
   text-transform: uppercase;
   display:inline-block;
@@ -20,6 +22,8 @@ h1 {
 h2 {
   font-size: 1em;
   font-weight: bold;
+  color: navy;
+  background-color: transparent;
   font-style: italic;
   margin: .8em 0;
 }
@@ -36,16 +40,23 @@ b {
   font-weight: bold;
 }
 
-h1#title {
+strong {
+  font-weight: bold;
+  color: silver;
+  background-color: transparent;
+}
+
+#title {
+  font-size: 1em;
   text-transform: none;
   font-weight: normal;
+  margin: .67em 0;
   margin-bottom: 2em;
 }
 
 .container > div {
   margin-bottom: 2em;
 }
-
 
 .group {
   margin: 1em;
