@@ -1,0 +1,52 @@
+body {
+  font-family: monospace;
+  max-width: 81ch;
+  margin: 1em;
+  line-height: 1.2;
+}
+
+div {
+  display: block;
+}
+
+h1 {
+  font-size: 1em;
+  font-weight: bold;
+  margin: .67em 0;
+  text-transform: uppercase;
+  display:inline-block;
+}
+
+h2 {
+  font-size: 1em;
+  font-weight: bold;
+  font-style: italic;
+  margin: .8em 0;
+}
+
+p {
+  margin: 1em 0;
+}
+
+em {
+  font-style: italic;
+}
+
+h1#title {
+  text-transform: none;
+  font-weight: normal;
+  margin-bottom: 2em;
+}
+
+.container > div {
+  margin-bottom: 2em;
+}
+
+
+.group {
+  margin: 1em;
+}
+
+.item {
+  margin: 1em;
+}
