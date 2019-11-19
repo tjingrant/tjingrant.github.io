@@ -2,7 +2,9 @@ var clickable = document.getElementsByClassName("clickable");
 var numClickable = clickable.length;
 
 for (var i = 0; i < numClickable; i++) {
-  clickable[i].parentNode.querySelector("div").style.display = "none";
+  if (i > 0) {
+    clickable[i].parentNode.querySelector("div").style.display = "none";
+  }
 
   clickable[i].addEventListener("mouseenter", function(event) {   
     event.target.style.textDecoration = "underline";
