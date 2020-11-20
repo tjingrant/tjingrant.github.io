@@ -1,11 +1,12 @@
 body {
   font-family: monospace;
   max-width: 81ch;
-  margin: 1em;
+  margin: 1em auto;
   line-height: 1.2;
 }
 
 div {
+  margin: auto;
   display: block;
 }
 
