@@ -1,4 +1,6 @@
 body {
+  //background-color: #202020;
+  //color: #F5F5F5;
   font-family: monospace;
   max-width: 81ch;
   margin: 1em auto;
@@ -27,6 +29,15 @@ h2 {
   background-color: transparent;
   //font-style: italic;
   margin: .8em 0;
+}
+
+a {
+  //text-decoration: none;
+  //color: #72BCD4;
+}
+
+a:hover {
+  //text-decoration: underline;
 }
 
 p {
