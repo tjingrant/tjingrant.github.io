@@ -2,8 +2,9 @@ body {
   //background-color: #202020;
   //color: #F5F5F5;
   font-family: monospace;
-  max-width: 81ch;
-  margin: 1em auto;
+  max-width: 80ch;
+  margin: 0 auto;
+  padding: 1em;
   line-height: 1.2;
 }
 
